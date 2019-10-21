@@ -3,8 +3,7 @@ Shell Scripts Inside
 
 [ MYSYNC.sh ] - Personal script
 
-  This script help me automating the process of upload or download my personal spend sheet. First, I installed 'INSYNC' program, and then
-I created my script to working whith the program. This is for Personal Use!
+  This script help me automating the process of upload or download my personal spend sheet. First, I installed 'INSYNC' program, and then I created my script to working whith the program. This is for Personal Use!
   
 [ SIVCONTROL.sh ] - Professional script
 
