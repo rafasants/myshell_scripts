@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# < AUTHOR: RAFAEL >
+# < AUTHOR: RAFAEL SANTOS>
 
 # This script is aimed to facilitate the backup of my spreadsheet to Cloud (Google Drive) using insync. But you can use this for any file, just configure the variables.
 
@@ -22,8 +22,18 @@ FILE_NAME="2019.xlsm"
 LOCAL_FILE_DATE=$(eval date -r $LOCAL_DIRECTORY$FILE_NAME "+%d%m%y%H%M%S")
 CLOUD_FILE_DATE=$(eval date -r $CLOUD_DIRECTORY$FILE_NAME "+%d%m%y%H%M%S")
 LOG_FILE="/home/rafael/Insync/Insync.log"
+PING="8.8.8.8"
 
 # DON'T CHANGE FROM HERE!
+
+eval ping -c2 $PING 1> /dev/null 2>&1
+if ! [ $? -eq "0" ]
+	then
+		xmessage -timeout 10 "An error ocurred. Please read the File Log!"
+		echo "Network Error! Check the Network configuration!" >> $LOG_FILE 2>&1
+		pkill insync
+		exit 1
+fi
 
 if [ "$LOCAL_FILE_DATE" == "$CLOUD_FILE_DATE" ]
 	then
@@ -44,6 +54,7 @@ if [ "$LOCAL_FILE_DATE" -gt "$CLOUD_FILE_DATE" ]
 			else
 				sleep 40
 				xmessage -timeout 10 "Update Successful!"
+				pkill insync
 				exit 0
 		fi
 fi
@@ -60,6 +71,7 @@ if [ "$CLOUD_FILE_DATE" -gt "$LOCAL_FILE_DATE" ]
                         else
 				sleep 30
                                 xmessage -timeout 10 "Update Successful!"
+				pkill insync
                                 exit 0
                 fi
 fi
