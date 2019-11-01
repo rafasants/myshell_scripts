@@ -19,8 +19,8 @@ fi
 CLOUD_DIRECTORY="/home/rafael/Insync/comprasml159@gmail\.com/Google\ Drive/CONTROLE_GASTOS/"
 LOCAL_DIRECTORY="/media/sf_virtual/GOOGLE_DRIVE/CONTROLE_GASTOS/"
 FILE_NAME="2019.xlsm"
-LOCAL_FILE_DATE=$(eval date -r $LOCAL_DIRECTORY$FILE_NAME "+%d%m%y%H%M%S")
-CLOUD_FILE_DATE=$(eval date -r $CLOUD_DIRECTORY$FILE_NAME "+%d%m%y%H%M%S")
+LOCAL_FILE_DATE=$(eval date -r $LOCAL_DIRECTORY$FILE_NAME "+%y%m%d%H%M%S")
+CLOUD_FILE_DATE=$(eval date -r $CLOUD_DIRECTORY$FILE_NAME "+%y%m%d%H%M%S")
 LOG_FILE="/home/rafael/Insync/Insync.log"
 PING="8.8.8.8"
 
