@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# < AUTHOR: RAFAEL SANTOS>
+# < AUTHOR: RAFAEL SANTOS >
 
 # This script is aimed to facilitate the backup of my spreadsheet to Cloud (Google Drive) using insync. But you can use this for any file, just configure the variables.
 
