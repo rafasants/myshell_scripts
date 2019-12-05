@@ -49,4 +49,4 @@ Best DNS Server: CLOUDFLARE 28.910 ms
 3. $ sudo chmod a+rwx /usr/local/bin/list /usr/local/bin/for_dns.sh
 4. echo "alias fordns="for_dns.sh | tee $HOME/log"" >> $HOME/.bashrc
 5. source $HOME/.bashrc
-5. DONE!
+5. DONE!!
