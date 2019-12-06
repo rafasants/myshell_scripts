@@ -14,11 +14,10 @@ the command. For this scripts, I needed the 'SSHPASS' program [ $whatis sshpass:
 
 [ for_dns.sh ] ****************************************************************
 
-<AUTHOR: RAFAEL SANTOS>
-
 I created this script just for study the loop "for". With this shell script, it's possible to discover the best DNS Server based on Ping command.
 For this, I made a list of DNS Servers IP's following a pattern.
 
+EXAMPLE:
 ___________________________________________
 |( DNS  -  IP DNS)|         >> | LATENCY |
 -------------------------------------------
@@ -40,13 +39,8 @@ ___________________________________________
 Best DNS Server: CLOUDFLARE 28.910 ms
 -------------------------------------------
 
+SETTING THE ENVIRONMENT:
 
-
-*configuring your environment:
-
-
-2. Save and move the script (for_dns.sh) with the list to /usr/local/bin/
-3. $ sudo chmod a+rwx /usr/local/bin/list /usr/local/bin/for_dns.sh
-4. echo "alias fordns="for_dns.sh | tee $HOME/log"" >> $HOME/.bashrc
-5. source $HOME/.bashrc
-5. DONE!!
+1. RUN <setup.sh> as root:$ >>> sudo ./setup.sh <<<
+2. TYPE THE FOLLOWING COMMAND AFTER RUN <setup.sh>:$ >>> test -e /etc/bash.bashrc && source /etc/bash.bashrc || source /etc/bashrc <<< 
+3. DONE!
