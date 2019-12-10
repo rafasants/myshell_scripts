@@ -44,3 +44,8 @@ SETTING THE ENVIRONMENT:
 1. RUN <setup.sh> as root:$ >>> sudo ./setup.sh <<<
 2. TYPE THE FOLLOWING COMMAND AFTER RUN <setup.sh>:$ >>> test -e /etc/bash.bashrc && source /etc/bash.bashrc || source /etc/bashrc <<< 
 3. DONE!
+
+
+[ ajustes_ip_siv.sh ] **************************************************
+
+  This script basically facilitates the setup of machines with "SIV - Sistema de Informação de Vôos". Configuring IP, Hostname, Servers, etc.
