@@ -1,5 +1,8 @@
 # myshell_scripts
 Shell Scripts Inside
+[ initial_configure.sh ] - Personal script
+
+  This script help me to do the basic settings of any distribution (based on Debian or RHEL). Settings like: System Updates, Installation of main packages, User settings, etc.
 
 [ MYSYNC.sh ] - Personal script **********************************************
 
