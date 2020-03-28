@@ -648,8 +648,51 @@ ${voffset 10}${color EAEAEA}${font GE Inspira:pixelsize=120}${time %I:%M}${font}
 ${voffset 1}${offset 12}${font Ubuntu:pixelsize=12}${color FFA300}HD ${offset 9}$color${fs_free /} / ${fs_size /}${offset 30}${color FFA300}RAM ${offset 9}$color$mem / $memmax${offset 30}${color FFA300}CPU ${offset 9}$color${cpu cpu0}%" > $CONKY_GOTHAM || echo "Error, please do it manually!"
 
 echo "Done!"
+echo
 
 echo "#############################################"
+echo
+
+## CRIA SCRIPT PARA LIMPAR CACHE PESSOAL E ADICIONA NA DAILY CRONTAB 
+
+echo "# Creating the scripts folder on /home ..."
+mkdir -p /home/$USUARIO/scripts || echo "Error, please do it manually!"
+
+echo "# Creating the script cache_clean ..."
+touch /home/$USUARIO/scripts/cache_clean.sh || echo "Error, please do it manually!"
+chmod +x /home/$USUARIO/scripts/cache_clean.sh || echo "Error, please do it manually!"
+
+echo "
+
+CACHE_SIZE=$(eval du -s ~$USER/.cache | cut -f1)
+
+
+	if [ $CACHE_SIZE -gt "1000000" ]
+	then
+		sudo rm -rf /home/$USER/.cache
+	fi" > /home/$USUARIO/scripts/cache_clean.sh || echo "Error, please do it manually!"
+
+echo "# Configuring crontab ..."
+
+	if [ -e /var/spool/cron/crontabs ]
+	then
+		touch /var/spool/cron/crontabs/$USUARIO || echo "Error, please do it manually!"
+		chmod 600 /var/spool/cron/crontabs/$USUARIO || echo "Error, please do it manually!"
+		chown $USUARIO.crontab /var/spool/cron/crontabs/$USUARIO || echo "Error, please do it manually!"
+		
+		echo "0 0 * * * exec /home/rafasants/scripts/cache_clean/cache_clean.sh" > /var/spool/cron/crontabs/$USUARIO || echo "Error, please do it manually!"
+	else
+		touch /var/spool/cron/$USUARIO || echo "Error, please do it manually!"
+		chmod 600 /var/spool/cron/$USUARIO || echo "Error, please do it manually!"
+		chown $USUARIO.$USUARIO /var/spool/cron/$USUARIO || echo "Error, please do it manually!"
+		
+		echo "0 0 * * * exec /home/rafasants/scripts/cache_clean/cache_clean.sh" > /var/spool/cron/$USUARIO || echo "Error, please do it manually!"
+	fi
+
+echo "# Done!"
+echo
+echo "#############################################"
+echo
 
 ## AVISOS
 
