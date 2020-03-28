@@ -277,3 +277,4 @@ sudo killall monitora_siv.sh
 sudo killall tempo_raiox.sh
 sudo killall firefox
 principal
+
