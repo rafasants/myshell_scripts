@@ -9,7 +9,7 @@ SENHA_ROOT='xxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 ####################              AUTHOR: RAFAEL SANTOS                  ####################
 ########	      This script makes my basics Linux configurations.              ########
 #####             Like: Install some Packages, update system based on DIST              #####
-###                    	  and edit some Config Files.                             ###
+###                    	  	  and edit some Config Files.                             ###
 ## 											   ##
 ###					./configura.sh					  ###
 ####                                			                                #####
@@ -644,7 +644,7 @@ use_spacer right
 
 minimum_size 0 0
 TEXT
-${voffset 10}${color EAEAEA}${font GE Inspira:pixelsize=120}${time %I:%M}${font}${voffset -84}${offset 10}${color FFA300}${font GE Inspira:pixelsize=42}${time %d} ${voffset -15}${color EAEAEA}${font GE Inspira:pixelsize=22}${time  %B} ${time %Y}${font}${voffset 24}${font GE Inspira:pixelsize=58}${offset -148}${time %A}${font}
+${voffset 10}${color EAEAEA}${font GE Inspira:pixelsize=120}${time %H:%M}${font}${voffset -84}${offset 10}${color FFA300}${font GE Inspira:pixelsize=42}${time %d} ${voffset -15}${color EAEAEA}${font GE Inspira:pixelsize=22}${time  %B} ${time %Y}${font}${voffset 24}${font GE Inspira:pixelsize=58}${offset -148}${time %A}${font}
 ${voffset 1}${offset 12}${font Ubuntu:pixelsize=12}${color FFA300}HD ${offset 9}$color${fs_free /} / ${fs_size /}${offset 30}${color FFA300}RAM ${offset 9}$color$mem / $memmax${offset 30}${color FFA300}CPU ${offset 9}$color${cpu cpu0}%" > $CONKY_GOTHAM || echo "Error, please do it manually!"
 
 echo "Done!"
