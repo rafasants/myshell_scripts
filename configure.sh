@@ -3,7 +3,7 @@
 exec 1 >> >(tee -a ~/configura.log)
 exec 2>&1 >(tee -a ~/configura.log)
 
-SENHA_ROOT='R4F4$ants'
+SENHA_ROOT='xxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 
 #############################################################################################
 ####################              AUTHOR: RAFAEL SANTOS                  ####################
