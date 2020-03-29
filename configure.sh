@@ -663,13 +663,14 @@ touch /home/$USUARIO/scripts/cache_clean.sh || echo "Error, please do it manuall
 chmod +x /home/$USUARIO/scripts/cache_clean.sh || echo "Error, please do it manually!"
 
 echo "
+#!/bin/bash
 
-CACHE_SIZE=$(eval du -s ~$USER/.cache | cut -f1)
+CACHE_SIZE=$(eval du -s ~$USUARIO/.cache | cut -f1)
 
 
 	if [ $CACHE_SIZE -gt "1000000" ]
 	then
-		sudo rm -rf /home/$USER/.cache
+		sudo rm -rf /home/$USUARIO/.cache
 	fi" > /home/$USUARIO/scripts/cache_clean.sh || echo "Error, please do it manually!"
 
 echo "# Configuring crontab ..."
