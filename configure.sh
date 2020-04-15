@@ -13,7 +13,7 @@ SENHA_ROOT='xxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 ## 											   ##
 ###					./configura.sh					  ###
 ####                                			                                #####
-########		        	     v1.5				     ########
+########		        	     v1.6				     ########
 ####################                                                     ####################
 #############################################################################################
 	
@@ -141,8 +141,9 @@ then
 
 	echo "# Updating sources.list ..."
 	apt update -y /dev/null || echo "Error, please do it manually!"
-
+	echo "# Repositories are updated!"
 	apt upgrade -y > /dev/null || echo "Error, please do it manually!"
+	echo "# All packages are updated!"
 	apt clean > /dev/null || echo "Error, please do it manually!"
 	apt autoclean > /dev/null || echo "Error, please do it manually!"
 
@@ -276,7 +277,7 @@ fi
 	if dmesg | grep -q "i8042"
 	then
 		echo "Fixing the keyboard bug when the OS is suspend ..."
-        	sed -ri "s/(.*CMDLINE.*)\"(.*)\"/\1\"\2 i8042.reset\"/" /etc/default/grub || echo "Error, please do it manually!"
+        	sed -ri "s/(.*CMDLINE.*)\"(.*)\"/\1\"\2 i8042.direct i8042.dumbkbd\"/" /etc/default/grub || echo "Error, please do it manually!"
 	fi
 
 ####### UPDATE THE GRUB FILE
@@ -328,8 +329,6 @@ then
 
 	echo "# Installing vim ..."
 	yum install vim -y > /dev/null || echo "Error, please do it manually!"
-	echo "# Installing htop ..."
-	yum install htop -y > /dev/null || echo "Error, please do it manually!"
 	echo "# Installing  alien ..."
 	yum install alien -y > /dev/null || echo "Error, please do it manually!"
 	echo "# Installing pv ..."
@@ -363,6 +362,8 @@ then
 	yum install homebank -y > /dev/null || echo "Error, please do it manually!"
 	echo "# Installing samba ..."
 	yum install samba -y > /dev/null || echo "Error, please do it manually!"
+	echo "# Installing Xpad..."
+	yum install xpad -y > /dev/null || echo "Error, please do it manually!"
 	echo "# Installing wine ..."
 	yum install wine -y > /dev/null || echo "Error, please do it manually!"
 	echo "# Installing qbittorrent"
@@ -419,14 +420,14 @@ then
 		apt install exfat-utils -y > /dev/null || echo "Error, please do it manually!"
 		echo "# Installing exfat-fuse ..."
 		apt install exfat-fuse -y > /dev/null || echo "Error, please do it manually!"
-		echo "# Installing htop ..."
-		apt install htop -y > /dev/null || echo "Error, please do it manually!"
 		echo "# Installing alien ..."
 		apt install alien -y > /dev/null || echo "Error, please do it manually!"
 		echo "# Installing pv ..."
 		apt install pv -y > /dev/null || echo "Error, please do it manually!"
 		echo "# Installing Gimp ..."
 		apt install gimp -y > /dev/null || echo "Error, please do it manually!"
+		echo "# Installing Xpad..."
+		apt install xpad -y > /dev/null || echo "Error, please do it manually!"
 		echo "# Installing wmctrl ..."
 		apt install wmctrl -y > /dev/null || echo "Error, please do it manually!"
 		echo "# Installing acpi ..."
@@ -451,28 +452,28 @@ fi
 	echo
 	echo "#############################################"
 
-## CONFIGURAR XORG COMO DEFAULT NO FEDORA
+##[[DISABLED]] CONFIGURAR XORG COMO DEFAULT NO FEDORA
 
-	if [ -f /etc/fedora-release ]
-	then
-
-		echo
-		echo "## Configuring Xorg as default ..."
-		sleep 1
-		sed -i "/daemon/a\DefaultSession=gnome-xorg.desktop" /etc/gdm/custom.conf || echo "Error, please do it manually!"
-
-		echo
-		echo "## Disabling Wayland ..."
-		sed -i "s/#WaylandEnable=false/WaylandEnable=false/" /etc/gdm/custom.conf || echo "Error, please do it manually!"
-	
-		echo
-		sleep 1
-		echo "Done!"
-		echo
-		echo "#############################################"
-		echo
-
-	fi
+#	if [ -f /etc/fedora-release ]
+#	then
+#
+#		echo
+#		echo "## Configuring Xorg as default ..."
+#		sleep 1
+#		sed -i "/daemon/a\DefaultSession=gnome-xorg.desktop" /etc/gdm/custom.conf || echo "Error, please do it manually!"
+#
+#		echo
+#		echo "## Disabling Wayland ..."
+#		sed -i "s/#WaylandEnable=false/WaylandEnable=false/" /etc/gdm/custom.conf || echo "Error, please do it manually!"
+#	
+#		echo
+#		sleep 1
+#		echo "Done!"
+#		echo
+#		echo "#############################################"
+#		echo
+#
+#	fi
 
 ## Setting keyboard layout
 
@@ -653,7 +654,7 @@ echo
 echo "#############################################"
 echo
 
-## CRIA SCRIPT PARA LIMPAR CACHE PESSOAL E ADICIONA NA DAILY CRONTAB 
+## CRIA SCRIPT PARA LIMPAR CACHE PESSOAL E ADICIONA NO ANACRONTAB DAILY 
 
 echo "# Creating the scripts folder on /home ..."
 mkdir -p /home/$USUARIO/scripts || echo "Error, please do it manually!"
@@ -673,22 +674,13 @@ CACHE_SIZE=$(eval du -s ~$USUARIO/.cache | cut -f1)
 		sudo rm -rf /home/$USUARIO/.cache
 	fi" > /home/$USUARIO/scripts/cache_clean.sh || echo "Error, please do it manually!"
 
-echo "# Configuring crontab ..."
+echo "# Configuring anacron ..."
 
-	if [ -e /var/spool/cron/crontabs ]
-	then
-		touch /var/spool/cron/crontabs/$USUARIO || echo "Error, please do it manually!"
-		chmod 600 /var/spool/cron/crontabs/$USUARIO || echo "Error, please do it manually!"
-		chown $USUARIO.crontab /var/spool/cron/crontabs/$USUARIO || echo "Error, please do it manually!"
-		
-		echo "0 0 * * * exec /home/rafasants/scripts/cache_clean/cache_clean.sh" > /var/spool/cron/crontabs/$USUARIO || echo "Error, please do it manually!"
-	else
-		touch /var/spool/cron/$USUARIO || echo "Error, please do it manually!"
-		chmod 600 /var/spool/cron/$USUARIO || echo "Error, please do it manually!"
-		chown $USUARIO.$USUARIO /var/spool/cron/$USUARIO || echo "Error, please do it manually!"
-		
-		echo "0 0 * * * exec /home/rafasants/scripts/cache_clean/cache_clean.sh" > /var/spool/cron/$USUARIO || echo "Error, please do it manually!"
-	fi
+        sudo chmod 666 /etc/anacrontab
+
+        echo "@weekly   6       clean.weekly    /home/$USUARIO/scripts/cache_clean.sh" >> /etc/anacrontab || echo "Error, please do it manually!"
+
+        sudo chmod 644 /etc/anacrontab
 
 echo "# Done!"
 echo
